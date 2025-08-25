@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
+    <style>
+        * {
+            margin: 0;
+            font-family: Arial;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url("http://localhost/lib/project/lib.webp");
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .log_in {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid wheat;
+            background:transparent;
+            backdrop-filter: blur(10px);
+            height: 500px;
+            width: 420px;
+            border-radius: 15px;
+            padding: 20px;
+        }
+        
+        .log_in h1 {
+            font-size: 36px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            color: #183153;
+        }
+        
+        .input-box {
+            position: relative;
+            width: 100%;
+            margin: 10px 0px;
+        }
+        
+        .input-box input {
+            width: 100%;
+            height: 40px;
+            border: 1px solid #183153;
+            outline: none;
+            /*background:transparent;*/
+            border-radius: 10px;
+            padding: 10px 10px 10px 40px;
+            font-size: 16px;
+            color: #183153;
+        }
+        /*
+        .input-box input::placeholder {
+            color: wheat; 
+        }*/
+        
+        .input-box i {
+            right: 15px;
+            top: 50%;
+            margin-left: 15px;
+            transform: translateY(30px);
+            font-size: 20px;
+            color: #183153;
+        }
+
+        .pass i{
+            margin-left: 340px;
+            transform: translateY(-150%);
+        }
+
+        .input-box field:focus{
+            width: 100%;
+            height: 100%;
+            padding: 0 1.25rem 0 3.12rem;
+            
+        }
+        
+        .forgot a {
+            text-decoration: none;
+            color: wheat;
+        }
+        
+        .forgot a:hover {
+            text-decoration: underline;
+        }
+        
+        .btn {
+            width: 376.8px;
+            height: 40px;
+            background: #183153;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            margin-top: 80px;
+        }
+        
+        .btn:hover {
+            background: #0f2248;
+        }
+        
+        .register-link {
+            margin: 10px;
+            font-size: 16px;
+            color: wheat;
+        }
+        
+        .register-link a {
+            text-decoration: none;
+            color: wheat;
+            font-weight: bold;
+        }
+        .register-link a:hover{
+            text-decoration: underline;
+        }        
+        
+    </style>
+</head>
+<body>
+    <div class="log_in">
+        <h1>Login</h1>
+        <% if (message) { %>
+            <p><%= message %></p>
+        <% } %>
+        <form action="/login" method="POST">
+            <div class="input-box">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" name="username" placeholder="Enter Username" required>
+            </div>
+            <div class="input-box">
+                <i class="fa-solid fa-lock"></i>
+                <div class="pass">
+                    <input type="password" name="password" placeholder="Enter Password" required>
+                    <i class="fa-solid fa-eye" id="togglePassword" onclick="togglePassword('password', 'togglePassword')"></i>
+                </div>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <div class="register-link">
+            <a href="signup">Don't have an account? Signup</a>
+        </div>
+    </div>
+    <script>
+        function togglePassword(fieldName, iconId) {
+            var passwordField = document.querySelector(`input[name='${fieldName}']`);
+            var toggleIcon = document.getElementById(iconId);
+        
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleIcon.classList.replace("fa-eye", "fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                toggleIcon.classList.replace("fa-eye-slash", "fa-eye");
+            }
+        }
+        
+    </script>
+</body>
+</html>

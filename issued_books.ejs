@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>issue</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
+    <style>
+        * {
+            margin: 0;
+            font-family: Arial;
+            border: border-box;
+        
+        }
+        body {
+            font-family: Arial;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            height: 60px;
+            background-color: #183153;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+        .nav-title{
+            height: 40px;
+            font-size: 1.75rem;
+            display: flex;
+            margin-left: 15px;
+            border-radius: 4px;
+        }
+        
+        .icon{
+            margin: 5.5px;
+        }
+        
+        .title{
+            margin: 4px;
+        }
+        .border{
+            border: 1.5px solid transparent ;
+        }
+        
+        .border:hover{
+            border: 1.5px solid white ;
+        }
+        .nav-right{
+            display: flex;
+            gap: 15px;
+            margin-left: auto;
+            align-items: center;
+        }
+        .logout{
+            margin: 4px;
+        }
+        .nav-logout{
+            border-radius: 4px;
+            margin-right: 30px;
+            text-decoration: none;
+            align-items: center;
+        }
+        .btn {
+            background: #1b75d0;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            padding: 8px 12px;
+        }
+        
+        .btn:hover {
+            background: rgb(20 110 190);
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 8px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .issued-container h2{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+
+        .book-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px;
+        }
+    
+        .book-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            gap: 15px;
+        }
+        
+    
+        .book-card img {
+            width: 80px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+    
+        .book-details {
+            flex-grow: 1;
+        }
+    
+        .book-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a1a1a;
+        }
+    
+        .book-info {
+            font-size: 14px;
+            color: #555;
+            margin-top: 3px;
+        }
+
+        .return-button {
+            background-color: #0d5b11; 
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .return-button:hover {
+            background-color: #187c19;
+            
+        }
+        /* Profile Modal */
+        #profileModal {
+            display: none;                
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            min-width: 350px;
+            max-width: 500px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            }
+        
+        /* Center the icon */
+        .profileModal i {
+            font-size: 100px;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+        
+        /* Style the modal text */
+        .profileModal p {
+            font-size: 18px;
+            margin: 12px 0;
+            color: #333;
+        }
+        
+        /* Close button */
+        #closeModal {
+            cursor: pointer;
+            font-size: 28px;
+            font-weight: bold;
+            color: #888;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+        }
+        
+        #closeModal:hover {
+            color: #333;
+        }
+        
+        /* Modal backdrop */
+        #modalBackdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        #profileBtn {
+            background: none;
+            color: white;
+            border: none;
+            font-size: 30px;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }             
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="nav-title border">
+                <div class="icon">
+                    <i class="fa-solid fa-book"></i>    
+                </div>
+                <div class="title">
+                    <p>LIBRARY MANAGEMENT</p>
+                </div>
+            </div>
+            <div class="nav-right">
+                <button id="profileBtn"><i class="fa-solid fa-circle-user"></i></button>
+                <div class="nav-logout border">
+                    <form action="">
+                        <button type="submit" class="btn">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="issued-container">
+            <h2>Issued Books</h2>
+            <% if (issuedBooks && issuedBooks.length > 0) { %>
+                <div class="book-list">
+                    <% issuedBooks.forEach(book => { %>
+                        <div class="book-card">
+                                <img src="<%= book.cover_image || 'default-cover.jpg' %>" alt="Book Cover" style="width: 80px; height: 100px; object-fit: cover; border-radius: 5px;">
+                                <div class="book-details">
+                                    <div class="book-title"><%= book.title %></div>
+                                    <div class="book-info"><strong>Author:</strong> <%= book.author %></div>
+                                    <div class="book-info"><strong>Publisher:</strong> <%= book.publisher %></div>
+                                    <div class="book-info"><strong>Issued On:</strong> <%= book.issue_date %></div>
+                                    <div class="book-info"><strong>Due Date:</strong> <%= book.due_date %></div>
+                                    <div class="book-info"><strong>Book ID:</strong> <%= book.book_id %></div>
+                                </div>
+                                <form method="POST" action="/return">
+                                    <input type="hidden" name="user_id" value="<%= user_id %>">
+                                    <input type="hidden" name="username" value="<%= username %>">
+                                    <input type="hidden" name="book_id" value="<%= book.book_id %>">
+                                    <button type="submit" class="return-button">Return</button>
+                                </form>                                
+                        </div>
+                    <% }) %>
+                </div>
+            <% } else { %>
+                <p>No books issued yet.</p>
+            <% } %>
+        </div>
+    
+    </header>
+    <!-- Profile Modal -->
+    <div id="profileModal" class="profileModal">
+        <span id="closeModal">&times;</span>
+        <i class="fa-solid fa-circle-user"></i>
+        <p><strong>Username:</strong> <span id="modalUsername"></span></p>
+        <p><strong>User ID:</strong> <span id="modalUserId"></span></p>
+        <p><strong>Email:</strong> <span id="modalEmail"></span></p>
+    </div>
+    <div id="modalBackdrop"></div>
+    <script>
+        const profileBtn = document.getElementById('profileBtn');
+        const profileModal = document.getElementById('profileModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalBackdrop = document.getElementById('modalBackdrop');
+        
+        profileModal.style.display = 'none';
+        modalBackdrop.style.display = 'none';
+
+        profileBtn.addEventListener('click', () => {
+            fetch('/profile')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('modalUsername').textContent = data.username;
+                    document.getElementById('modalUserId').textContent = data.user_id;
+                    document.getElementById('modalEmail').textContent = data.email;
+                    profileModal.style.display = 'block';
+                    modalBackdrop.style.display = 'block';
+                })
+                .catch(err => {
+                    console.error('Error loading profile:', err);
+                    alert('Failed to load profile info.');
+                });
+        });
+
+        closeModal.addEventListener('click', () => {
+            profileModal.style.display = 'none';
+            modalBackdrop.style.display = 'none';
+        });
+
+        modalBackdrop.addEventListener('click', () => {
+            profileModal.style.display = 'none';
+            modalBackdrop.style.display = 'none';
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const bookResults = document.getElementById("book-results");
+            const searchInput = document.getElementById("search-input");
+            const searchBtn = document.getElementById("search-btn");
+
+            async function fetchIssuedBooks(query = "") {
+                try {
+                    const res = await fetch(`/api/issued-books?q=${encodeURIComponent(query)}&page=1`);
+                    const books = await res.json();
+
+                    bookResults.innerHTML = "";
+
+                    if (books.length === 0) {
+                        bookResults.innerHTML = "<p>No issued books found.</p>";
+                        return;
+                    }
+
+                    books.forEach(book => {
+                        const card = document.createElement("div");
+                        card.className = "book-card";
+                        card.innerHTML = `
+                            <div class="book-details">
+                                <div class="book-title">${book.book_name}</div>
+                                <div class="book-info">Issued To: ${book.username}</div>
+                                <div class="book-info">Issue Date: ${book.issue_date}</div>
+                                <div class="book-info">Due Date: ${book.due_date}</div>
+                            </div>
+                        `;
+                        bookResults.appendChild(card);
+                    });
+                } catch (err) {
+                    console.error("Error fetching issued books:", err);
+                    bookResults.innerHTML = "<p>Error loading issued books.</p>";
+                }
+            }
+
+            // Initial fetch
+            fetchIssuedBooks();
+
+            // Search on click
+            searchBtn.addEventListener("click", () => {
+                fetchIssuedBooks(searchInput.value.trim());
+            });
+
+            // Optional: search on pressing Enter key
+            searchInput.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                    fetchIssuedBooks(searchInput.value.trim());
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>
