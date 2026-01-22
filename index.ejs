@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MyLibrary - Digital Library Management System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f7f9fc;
+      color: #333;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      height: 60px;
+      background-color: #183153;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .nav-title {
+      display: flex;
+      align-items: center;
+      font-size: 1.75rem;
+    }
+
+    .nav-title i {
+      margin-right: 10px;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 10px;
+    }
+
+    .border {
+      border: 1.5px solid transparent;
+      border-radius: 4px;
+    }
+
+    .border:hover {
+      border: 1.5px solid white;
+    }
+
+    .btn {
+      background: #1b75d0;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 13px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: rgb(20 110 190);
+    }
+
+    .hero-sec {
+      background: linear-gradient(rgba(24, 49, 83, 0.6), rgba(24, 49, 83, 0.6)), url('http://localhost/lib/project/library.jpg') no-repeat center center/cover;
+      min-height: 90vh;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero-sec h2 {
+      margin-top: 100px;
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .hero-sec p {
+      font-size: 1.4rem;
+      max-width: 800px;
+      margin: 0 auto 30px;
+    }
+
+    .hero-sec p strong {
+      color: #ffcc00;
+    }
+
+    .hero-sec a {
+      background-color: #ff9900;
+      width: 300px;
+      color: white;
+      margin: 30px auto 0;
+      padding: 12px 30px;
+      font-size: 1rem;
+      border-radius: 10px;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .hero-sec a:hover {
+      background-color: #e88e00;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 60px 40px;
+      background-color: #ffffff;
+      text-align: center;
+    }
+
+    .feature-box {
+      background: #f2f7ff;
+      padding: 30px 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-8px);
+      background-color: #eaf2ff;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-box h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+    }
+
+    .cta-section {
+      background-color: #1b75d0;
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .cta-section h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .cta-section p {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+    }
+
+    .cta-section a {
+      background-color: #ffffff;
+      color: #1b75d0;
+      padding: 12px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .cta-section a:hover {
+      background-color: #e5e5e5;
+    }
+
+    footer {
+      background-color: #183153;
+      color: #ccc;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+    }
+
+    .ftr {
+      margin-top: 10px;
+    }
+
+    .ftr a {
+      color: #ccc;
+      margin: 0 8px;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+
+    .ftr a:hover {
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      .hero-sec h2 {
+        font-size: 2.2rem;
+      }
+
+      .hero-sec p {
+        font-size: 1.1rem;
+      }
+
+      .hero-sec a {
+        width: 90%;
+      }
+
+      .features {
+        padding: 40px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="navbar">
+      <div class="nav-title border">
+        <i class="fa-solid fa-book" aria-hidden="true"></i>
+        <span>LIBRARY MANAGEMENT</span>
+      </div>
+      <div class="nav-right">
+        <form action="/login">
+          <button type="submit" class="btn border">Log in</button>
+        </form>
+        <form action="/signup">
+          <button type="submit" class="btn border">Sign up</button>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero-sec">
+    <h2>Welcome to MyLibrary</h2>
+    <p>Discover, manage, and borrow from a massive collection of <strong>131,860 books</strong> — your digital library, redefined.</p>
+    <a href="/browse">Start Browsing</a>
+  </section>
+
+  <section class="features">
+    <div class="feature-box">
+      <h3>Extensive Collection</h3>
+      <p>Over 131,000 books available across categories, authors, and genres.</p>
+    </div>
+    <div class="feature-box">
+      <h3>Instant Borrowing</h3>
+      <p>Quick book issuing and seamless returns with real-time tracking.</p>
+    </div>
+    <div class="feature-box">
+      <h3>Personalized Dashboard</h3>
+      <p>Keep track of your issued books, history, and personalized recommendations.</p>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2>Join the Digital Library Revolution</h2>
+    <p>Create your account today and enjoy full access to our powerful library system.</p>
+    <a href="/signup">Create an Account</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 MyLibrary. All rights reserved.</p>
+    <div class="ftr">
+      <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+    </div>
+  </footer>
+
+</body>
+</html>
