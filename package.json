@@ -44,5 +44,11 @@
       "iphone/6.0..latest",
       "android-browser/4.2..latest"
     ]
+  },
+  "dependencies": {
+    "ejs": "^4.0.1",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mysql": "^2.18.1"
   }
 }
