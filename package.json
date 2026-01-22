@@ -13,7 +13,7 @@
     "bench": "matcha test/bench.js"
   },
   "devDependencies": {
-    "matcha": "^0.7.0",
+    "matcha": "^0.1.1",
     "tape": "^4.6.0"
   },
   "keywords": [
@@ -46,6 +46,8 @@
     ]
   },
   "dependencies": {
+    "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
     "ejs": "^4.0.1",
     "express": "^5.2.1",
     "express-session": "^1.19.0",
