@@ -35,13 +35,7 @@ const db = mysql.createPool({
     port:45141
 });
 
-db.connect(err => {
-    if (err) {
-        console.error("Database connection failed: " + err.stack);
-        return;
-    }
-    console.log("Connected to MySQL database.");
-});
+
 app.get('/profile', (req, res) => {
     const userId = req.session.user_id;
   
