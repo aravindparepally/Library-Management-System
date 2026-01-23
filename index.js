@@ -26,7 +26,10 @@ app.set("views", path.join(__dirname, "views"));
 // Serve static files (CSS, JS, images)
 app.use(express.static("public"));
 
-const db = mysql.createConnection({
+const mysql = require('mysql');
+
+const db = mysql.createPool({
+    connectionLimit: 10,
     host: "nozomi.proxy.rlwy.net",
     user: "root",
     password: "SuAQkVUuurTFkDDMWmgkxoOMDmCmPegg",
