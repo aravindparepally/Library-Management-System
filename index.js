@@ -27,10 +27,11 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static("public"));
 
 const db = mysql.createConnection({
-    host: "localhost",
+    host: "nozomi.proxy.rlwy.net",
     user: "root",
-    password: "",
-    database: "project"
+    password: "SuAQkVUuurTFkDDMWmgkxoOMDmCmPegg",
+    database: "project",
+    port:45141
 });
 
 db.connect(err => {
@@ -391,7 +392,7 @@ app.post("/return", (req, res) => {
 
 
 // Start Server
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log("Server running on http://localhost:" + PORT);
 });
